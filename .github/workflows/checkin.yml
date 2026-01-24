@@ -33,9 +33,17 @@ jobs:
             exit 1
           fi
           echo "✅ Secrets configured"
+          echo "Cookie length: ${#GLADOS_COOKIE}"
+          echo "Cookie preview: ${GLADOS_COOKIE:0:20}..."
+        env:
+          GLADOS_COOKIE: ${{ secrets.GLADOS_COOKIE }}
       
       - name: Run Checkin
-        run: python checkin.py
+        run: |
+          echo "🔍 Debug: Checking token in checkin.py"
+          grep -n "token" checkin.py | head -5
+          echo "---"
+          python checkin.py
         timeout-minutes: 5
         env:
           GLADOS_COOKIE: ${{ secrets.GLADOS_COOKIE }}
