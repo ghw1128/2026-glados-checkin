@@ -7,8 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       dispatch_source:
-        description: 手动运行请选择 manual；外部定时器填写 external
-        required: true
+        description: 手动运行请选择 manual；外部定时器可不填（默认按 external）
+        required: false
+        default: external
         type: choice
         options:
           - manual
